@@ -1,0 +1,50 @@
+<!--------------- <?php
+     $servername = "localhost";
+     $username = "root";
+     $password = "";
+     $conn = new PDO("mysql:host=$servername;dbname=ihoms_inventory", $username, $password);
+     session_start(); 
+
+     if(!isset($_SESSION['user_name'])){
+        header("location:../");
+    }
+    else
+    {
+        $_SESSION['user_name'];
+        $_SESSION['depts'];
+    }
+  ?>
+  <?php 
+$q=mysqli_query($conn,"SELECT * from notice where user='".$_SESSION['user_name']."'");
+$rr=mysqli_num_rows($q);
+if(!$rr)
+{
+echo "<h2 style='color:red'>No Notice!!!</h2>";
+}
+else
+
+?>
+    <h2>ALL NOTIFICATION</h2>
+    <table class="center" class="table table-bordered">
+	<Tr class="success">
+		<th>Sr.No</th>
+		<th>Subject</th>
+		<th>Details</th>
+		<th>Date</th>
+		</Tr>
+      
+<?php
+$i=1;
+while($row=mysql_fetch_assoc(result: $q))
+{
+    echo "<Tr>";
+    echo "<td>".i."</td>";
+    echo "<td>".$row['subject']."</td>";
+    echo "<td>".$row['Description']."</td>";
+    echo "<td>".$row['Date']."</td>";
+
+    echo "</Tr>";
+    $i++;
+}
+?>
+ </table> ---------->
